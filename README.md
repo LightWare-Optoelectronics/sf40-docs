@@ -1,8 +1,5 @@
 <!-- ![alt text](images/company_logo_big.png "LightWare logo") -->
 
- <!-- 814 x 1000 -->
-<div style="text-align:center"><img src ="images/product.png" width="271" height="333"/></div>
-
 # About this document
 
 ## Product support
