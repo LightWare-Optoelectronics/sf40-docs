@@ -10,11 +10,4 @@
   * [Serial interface](communication.md)
   * [Command list](commands.md)
   * [Command descriptions](command_detail.md)
-
-* Guides
-  * [Quick start](initiate.md)
-  * [Initiating communication](initiate.md)
-  * [Streaming points](streaming.md)
-  * [Virtual range finder](streaming.md)
-  * [Saving parameters](saving.md)
   
