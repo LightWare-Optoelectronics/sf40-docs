@@ -1,7 +1,5 @@
 # Specifications
 
-!> Needs checking
-
 | | SF40/C (100 m)|
 |---|---|
 | **Range** | 0 ... 100 meters (natural targets)|
@@ -13,7 +11,7 @@
 | **Motor power supply current** | 0.5 A (max)
 | **Laser power supply voltage** | 5.0 V DC (+-10%)
 | **Outputs & interfaces** | Serial UART 3.3 V TTL 
-| **Dimensions** | 91 mm (height) x 79 mm (largest diameter)
+| **Dimensions** | 80 mm (height) x 79 mm (largest diameter)
 | **Weight** | 256 g
 | **Laser power** | 20 W (peak), 11 mW (average), Class 1M
 | **Optical aperture** | 51 mm
