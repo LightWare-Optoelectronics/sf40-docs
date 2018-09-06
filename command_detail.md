@@ -18,9 +18,9 @@ The hardware revision number as a `uint32`.
 | `uint32` | - | - |
 
 ---
-## 2. Firmware version
+## Firmware version [2]
 
-The version of currently installed firmware represented as `4 bytes`. This can be used to identify the product for API compatibility. The [product support](/?id=product-support) section details which firmware versions this document applies to.
+The version of currently installed firmware represented as `4 bytes`. This can be used to identify the product for API compatibility.
 
 | 1 | 2 | 3 | 4 |
 |---|---|---|---|
@@ -31,7 +31,7 @@ The version of currently installed firmware represented as `4 bytes`. This can b
 | `4 bytes` | - | - |
 
 ---
-## 3. Serial number
+## Serial number [3]
 
 A `16 byte string` (null terminated) of the serial identifier assigned during production.
 
@@ -40,7 +40,7 @@ A `16 byte string` (null terminated) of the serial identifier assigned during pr
 | `16 byte string` | - | - |
 
 ---
-## 7. UTF8 text message
+## UTF8 text message [7]
 
 *Serial interface only*
 
@@ -51,7 +51,7 @@ A null terminated ASCII string. The SF40 will send this command when it needs to
 | - | - | - |
 
 ---
-## 9. User data
+## User data [9]
 
 This command allows 16 bytes to be stored and read for any purpose.
 
@@ -60,7 +60,7 @@ This command allows 16 bytes to be stored and read for any purpose.
 | `16 bytes` | `16 bytes` | Yes |
 
 ---
-## 10. Token
+## Token [10]
 
 Current safety token required for performing certain operations. Once a token has been used it will expire and a new token is created. 
 
@@ -69,7 +69,7 @@ Current safety token required for performing certain operations. Once a token ha
 | `uint16` | - | - |
 
 ---
-## 12. Save parameters
+## Save parameters [12]
 
 Several commands write to parameters that can persist across power cycles. These parameters will only persist once the `Save parameters` command has been written with the appropriate `token`. The safety token is used to prevent unintentional writes and once a successful save has completed the token will expire.
 
@@ -78,7 +78,7 @@ Several commands write to parameters that can persist across power cycles. These
 | - | `uint16` | - |
 
 ---
-## 14. Reset
+## Reset [14]
 
 Writing the safety `token` to this command will restart the SF40.
 
@@ -87,7 +87,7 @@ Writing the safety `token` to this command will restart the SF40.
 | - | `uint16` | - |
 
 ---
-## 16. Stage firmware
+## Stage firmware [16]
 
 The first part of uploading firmware to the SF40 is to stage the data. This command accepts pages of the firmware, each `128 bytes` long, and an index to indicate which page is being uploaded. Pages are created by dividing the firmware upgrade file into multiple 128 byte chunks.
 
@@ -116,9 +116,9 @@ When reading this command, or analyzing its response after writing a page, the p
 | `int32` | `130 bytes` | - |
 
 ---
-## 17. Commit firmware
+## Commit firmware [17]
 
-The second part of uploading firmware to the SF40 is to commit the staged data. Once the firmware data has been fully uploaded using the [16. Stage Firmware](command_detail?id=_16-stage-firmware) command, then this command can be written to (with 0 bytes).
+The second part of uploading firmware to the SF40 is to commit the staged data. Once the firmware data has been fully uploaded using the [Stage firmware [16]](command_detail?id=stage-firmware-16) command, then this command can be written to (with 0 bytes).
 
 When reading this command, or analyzing its response after writing, the packet will contain an `int32` error code:
 
@@ -127,7 +127,7 @@ When reading this command, or analyzing its response after writing, the packet w
 |-1|Firmware integrity check failed|
 |1|Firmware integrity check passed and firmware committed|
 
-Once the firmware is committed, a reboot is required to engage the new firmware. This can be done by cycling power to the SF40 or by sending the [14. Reset](command_detail?id=_14-reset) command.
+Once the firmware is committed, a reboot is required to engage the new firmware. This can be done by cycling power to the SF40 or by sending the [Reset [14]](command_detail?id=reset-14) command.
 
 After the unit has rebooted the firmware version should be checked to ensure the new firmware is installed.
 
@@ -136,7 +136,7 @@ After the unit has rebooted the firmware version should be checked to ensure the
 | `int32` | `0 bytes` | - |
 
 ---
-## 20. Incoming voltage
+## Incoming voltage [20]
 
 The incoming voltage is directly measured from the incoming 5 V line. The response from reading this command is in counts. To convert the counts to voltage use the following equation:
 
@@ -147,25 +147,25 @@ The incoming voltage is directly measured from the incoming 5 V line. The respon
 | `uint32` | - | - |
 
 ---
-## 30. Stream
+## Stream [30]
 
 The SF40 can continuously output data without individual request commands being issued. Reading from the `Stream` command will indicate what type of data is being streamed. Writing to the `Stream` command will set the type of data to be streamed.
 
 |Value|Streamed data|
 |---|---|
 | 0 | disabled |
-| 3 | [48. Distance output](command_detail?id=_48-distance-output) |
+| 3 | [Distance output [48]](command_detail?id=distance-output-48) |
 
 |Read|Write|Persists|
 |---|---|---|
 | `uint32` | `uint32` | No |
 
 ---
-## 48. Distance output
+## Distance output [48]
 
-This command contains the measurement results over a period of time. If [30. Stream](command_detail?id=_30-stream) is set to `3` then this command will automatically output as measurements are taken.
+This command contains measurement results over a period of time. If [Stream [30]](command_detail?id=stream-30) is set to `3` then this command will automatically output as measurements are taken.
 
-!> Please note that the rate at which this command is output will vary based on [108. Output rate](command_detail?id=_108-output-rate).
+!> Please note that the rate at which this command is output will vary based on [Output rate [108]](command_detail?id=output-rate-108).
 
 Each distance output packet contains distance measurement data for a consecutive series of points. There is a maximum of 200 points per packet. A packet will only contain points from the same revolution.
 
@@ -173,10 +173,10 @@ The data is composed as follows:
 
 |Byte offset|Data type|Name|Description|
 |---|---|---|---|
-|0x00|`1 byte`|Alarm state|State of each alarm as described in [111. Alarm state](command_detail?id=_111-alarm-state)|
+|0x00|`1 byte`|Alarm state|State of each alarm as described in [Alarm state [111]](command_detail?id=alarm-state-111)|
 |0x01|`uint16`|Points per second|Number of points per second.|
-|0x03|`int16`|Forward offset|Orientation offset as described in [109. Forward offset](command_detail?id=_109-forward-offset)|
-|0x05|`int16`|Motor voltage|Motor voltage as described in [107. Motor voltage](command_detail?id=_107-motor-voltage)|
+|0x03|`int16`|Forward offset|Orientation offset as described in [Forward offset [109]](command_detail?id=forward-offset-109)|
+|0x05|`int16`|Motor voltage|Motor voltage as described in [Motor voltage [107]](command_detail?id=motor-voltage-107)|
 |0x07|`uint8`|Revolution index|Increments as each new revolution begins. Note that this value wraps to 0 after 255.|
 |0x08|`uint16`|Point total|Total number of points this revolution.|
 |0x0A|`uint16`|Point count|Number of points in this packet.|
@@ -191,11 +191,11 @@ By using the `Point start index` and `Point total` you can determine the angle i
 
 |Read|Write|Persists|
 |---|---|---|
-| `uint32` | `uint32` | - |
+| - | - | - |
 
 ---
 
-## 50. Laser firing
+## Laser firing [50]
 
 Reading this command will indicate the current laser firing state. Writing to this command will enable or disable the firing of the laser. 
 
@@ -209,7 +209,7 @@ Reading this command will indicate the current laser firing state. Writing to th
 | `uint8` | `uint8` | No |
 
 ---
-## 55. Temperature
+## Temperature [55]
 
 Reading this command will return the temperature in 100ths of a degree.
 
@@ -218,7 +218,7 @@ Reading this command will return the temperature in 100ths of a degree.
 | `uint32` | - | - |
 
 ---
-## 90. Baud rate
+## Baud rate [90]
 
 The baud rate as used by the serial interface. This parameter only takes effect when the serial interface is first enabled after power-up or restart.
 
@@ -236,14 +236,14 @@ Reading this command will return the baud rate. Writing to this command will set
 | `uint8` | `uint8` | Yes |
 
 ---
-## 105. Distance
+## Distance [105]
 
 Reading this command will return the `average`, `closest` and `furthest` distance within an angular view pointing in a specified direction. When writing to this command you can specify the direction and angular width of the view that the results are calculated from. The response to the write command is the same as the read command.
 
 Data response when reading or writing:
 
 |Byte offset|Data type|Description|
-|---|---|---|---|
+|---|---|---|
 |0x00|`int16`|Average distance [cm]|
 |0x02|`int16`|Closest distance [cm]|
 |0x04|`int16`|Furthest distance [cm]|
@@ -252,7 +252,7 @@ Data response when reading or writing:
 Data for request when writing:
 
 |Byte offset|Data type|Description|
-|---|---|---|---|
+|---|---|---|
 |0x00|`int16`|Direction [degrees]|
 |0x02|`int16`|Angular width [degrees]|
 
@@ -261,7 +261,7 @@ Data for request when writing:
 | `10 bytes` | `4 bytes` | N |
 
 ---
-## 106. Motor state
+## Motor state [106]
 
 Reading this command will return the current state of the motor. This can be useful to debug or check start-up conditions.
 
@@ -277,7 +277,7 @@ Reading this command will return the current state of the motor. This can be use
 | `uint8` | - | - |
 
 ---
-## 107. Motor voltage
+## Motor voltage [107]
 
 Reading this command will return the voltage drawn by the motor in mV.
 
@@ -286,7 +286,7 @@ Reading this command will return the voltage drawn by the motor in mV.
 | `uint16` | - | - |
 
 ---
-## 108. Output rate
+## Output rate [108]
 
 The output rate controls the amount of data sent to the host when distance output streaming is enabled.
 
@@ -302,7 +302,7 @@ The output rate controls the amount of data sent to the host when distance outpu
 | `uint8` | `uint8` | Yes |
 
 ---
-## 109. Forward offset
+## Forward offset [109]
 
 The forward offset affects the position of the `0 degree` direction. The `orientation` label on the front of the SF40 marks the default `0 degree` direction.
 
@@ -311,7 +311,7 @@ The forward offset affects the position of the `0 degree` direction. The `orient
 | `int16` | `int16` | Yes |
 
 ---
-## 110. Revolutions
+## Revolutions [110]
 
 Reading this command will return the number of full revolutions since start-up.
 
@@ -322,7 +322,7 @@ Reading this command will return the number of full revolutions since start-up.
 | `uint32` | - | - |
 
 ---
-## 111. Alarm state
+## Alarm state [111]
 
 Reading this command will return a byte with the current state of all alarms. Each bit represents 1 of the 7 alarms, if the bit is set then the alarm is currently triggered. The most significant bit is set when any alarm is currently triggered.
 
@@ -342,7 +342,7 @@ Reading this command will return a byte with the current state of all alarms. Ea
 | `1 byte` | - | - |
 
 ---
-## 112. Alarm 1
+## Alarm 1 [112]
 
 !> This is the same for all 7 alarms.
 
@@ -362,7 +362,7 @@ The same data bytes as specified above can be written to this command to set the
 | `7 bytes` | `7 bytes` | Yes |
 
 ---
-## 113. Alarm 2
+## Alarm 2 [113]
 
 By reading this command the configuration for this alarm is retrieved as follows:
 
@@ -380,7 +380,7 @@ The same data bytes as specified above can be written to this command to set the
 | `7 bytes` | `7 bytes` | Yes |
 
 ---
-## 114. Alarm 3
+## Alarm 3 [114]
 
 By reading this command the configuration for this alarm is retrieved as follows:
 
@@ -398,7 +398,7 @@ The same data bytes as specified above can be written to this command to set the
 | `7 bytes` | `7 bytes` | Yes |
 
 ---
-## 115. Alarm 4
+## Alarm 4 [115]
 
 By reading this command the configuration for this alarm is retrieved as follows:
 
@@ -416,7 +416,7 @@ The same data bytes as specified above can be written to this command to set the
 | `7 bytes` | `7 bytes` | Yes |
 
 ---
-## 116. Alarm 5
+## Alarm 5 [116]
 
 By reading this command the configuration for this alarm is retrieved as follows:
 
@@ -434,7 +434,7 @@ The same data bytes as specified above can be written to this command to set the
 | `7 bytes` | `7 bytes` | Yes |
 
 ---
-## 117. Alarm 6
+## Alarm 6 [117]
 
 By reading this command the configuration for this alarm is retrieved as follows:
 
@@ -452,7 +452,7 @@ The same data bytes as specified above can be written to this command to set the
 | `7 bytes` | `7 bytes` | Yes |
 
 ---
-## 118. Alarm 7
+## Alarm 7 [118]
 
 By reading this command the configuration for this alarm is retrieved as follows:
 

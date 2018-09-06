@@ -13,11 +13,7 @@ Requests are made using one of the available [commands](commands.md) and are eit
 - Stop: `1 bit`
 - Flow control: `none`
 
-!> The SF40 can operate in baud rates as low as `115200` but maximum data output will require higher data rates.
-
-## Wiring
-
-<div style="text-align:center"><img src ="images/wiring.svg" title="Wiring diagram"/></div>
+!> The SF40 can operate in baud rates as low as `115200` but maximum data output will require higher rates.
 
 ## Packets
 
@@ -133,4 +129,4 @@ Here is the recommended procedure for sending a command request and reading the 
 
 <div style="text-align:center"><img src ="images/serial_request_response_flow.svg"/></div>
 
-> The values used for timeout or number of retries should be tuned to the specific application.
+!> The values used for timeout or number of retries should be tuned to the specific application.
