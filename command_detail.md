@@ -238,7 +238,9 @@ Reading this command will return the baud rate. Writing to this command will set
 ---
 ## Distance [105]
 
-Reading this command will return the `average`, `closest` and `furthest` distance within an angular view pointing in a specified direction. When writing to this command you can specify the direction and angular width of the view that the results are calculated from. The response to the write command is the same as the read command.
+!> NOTE: The data structure for reading/writing this command has changed since firmware 1.0.1.
+
+Reading this command will return the `average`, `closest` and `furthest` distance within an angular view pointing in a specified direction. When writing to this command you can specify the direction and angular width of the view that the results are calculated from. The response to the write command is the same as the read command. Readings below the `Minimum distance` will be ignored.
 
 Data response when reading or writing:
 
@@ -247,7 +249,8 @@ Data response when reading or writing:
 |0x00|`int16`|Average distance [cm]|
 |0x02|`int16`|Closest distance [cm]|
 |0x04|`int16`|Furthest distance [cm]|
-|0x06|`uint32`|Calculation time [us]|
+|0x06|`int16`|Angle to closest distance [degrees]|
+|0x08|`uint32`|Calculation time [us]|
 
 Data for request when writing:
 
@@ -255,6 +258,7 @@ Data for request when writing:
 |---|---|---|
 |0x00|`int16`|Direction [degrees]|
 |0x02|`int16`|Angular width [degrees]|
+|0x04|`int16`|Minimum distance [cm]|
 
 |Read|Write|Persists|
 |---|---|---|
