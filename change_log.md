@@ -12,6 +12,11 @@
 6. If the device is not the latest version you can click the `Upgrade` button to begin the process.
 7. Wait until the upgrade has completed successfully and click `OK`.
 
+## 1.1.1
+
+*Fixes*
+- Version `1.1.0` had the LWNX protocol disabled by default. It is now active by default.
+
 ## 1.1.0
 
 *Features*

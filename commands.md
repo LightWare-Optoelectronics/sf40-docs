@@ -21,7 +21,7 @@
 |50	|[Laser firing](command_detail?id=laser-firing-50)		     		|Laser firing state								|RW	|1	|1	|N|
 |55	|[Temperature](command_detail?id=temperature-55)		     	  	|Measured temperature							|R	|4	|-	|-|
 |90	|[Baud rate](command_detail?id=baud-rate-90)		            	|Serial baud rate								|RW	|1	|1	|Y|
-|105|[Distance](command_detail?id=distance-105)		        	    |Single direction distance						    |RW	|10	|4	|N|
+|105|[Distance](command_detail?id=distance-105)		        	    |Single direction distance						    |RW	|12	|6	|N|
 |106|[Motor state](command_detail?id=motor-state-106)		        |Motor state								    |R	|1	|-	|-|
 |107|[Motor voltage](command_detail?id=motor-voltage-107)		        	|Measured motor voltage							|R	|2	|-	|-|
 |108|[Output rate](command_detail?id=output-rate-108)	        |Streaming point output rate			        |RW	|1	|1	|Y|

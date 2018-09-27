@@ -262,7 +262,7 @@ Data for request when writing:
 
 |Read|Write|Persists|
 |---|---|---|
-| `10 bytes` | `4 bytes` | N |
+| `12 bytes` | `6 bytes` | N |
 
 ---
 ## Motor state [106]
