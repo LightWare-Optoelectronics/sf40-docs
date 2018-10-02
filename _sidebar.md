@@ -14,4 +14,3 @@
 * Guides
   * [Initiating communication](initiate.md)
   * [Saving parameters](saving.md)
-  
