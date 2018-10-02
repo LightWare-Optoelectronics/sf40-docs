@@ -20,6 +20,8 @@
 - Power supply should provide 12 V +- 10%
 - Power supply current capacity should be at least 0.5 A
 
+<div style="page-break-after: always;"></div>
+
 ## Mounting on an airframe
 
 <div style="text-align:center"><img src ="images/mounting.svg"/></div>
@@ -27,6 +29,8 @@
 ## Dimension drawings
 
 <div style="text-align:center"><img src ="images/dimensions.svg"/></div>
+
+<div style="page-break-after: always;"></div>
 
 ## Labeling
 

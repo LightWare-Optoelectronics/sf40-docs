@@ -23,6 +23,8 @@ damage and adversely affect the laser safety rating.
 
 <div style="text-align:center"><img src ="images/labels.svg"/></div>
 
+<div style="page-break-after: always;"></div>
+
 ## Laser radiation information
 
  Specification | Value / AEL | Notes 

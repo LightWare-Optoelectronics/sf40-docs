@@ -1,7 +1,5 @@
 # Command list
 
-!> If a command is not readable or writable then it can only be received from the SF40 and not sent to it.
-
 |ID|Name|Description|RW|Read bytes|Write bytes|Persists|
 |---|---|---|---|---|---|---|
 |0	|[Product name](command_detail?id=product-name-0)		        	|Product name									|R	|16	|-	|-|

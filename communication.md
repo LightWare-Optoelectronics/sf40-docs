@@ -94,6 +94,8 @@ uint16_t createCRC(uint8_t* Data, uint16_t Size)
 }
 ```
 
+<div style="page-break-after: always;"></div>
+
 **Javascript**
 ```javascript
 function createCRC(data, size) {
@@ -114,6 +116,9 @@ function createCRC(data, size) {
     return crc;
 }
 ```
+
+<div style="page-break-after: always;"></div>
+
 ## Receiving packets
 
 Here is the process for reading the raw serial byte stream and identifying packets. Once a packet has been successfully read it can be processed based on its command ID.
@@ -121,6 +126,8 @@ Here is the process for reading the raw serial byte stream and identifying packe
 <div style="text-align:center"><img src ="images/packet_reading.svg"/></div>
 
 !> If the packet length or checksum is invalid then it is technically more correct to roll the incoming stream back to when the start byte was found. However in practice this has little appreciable impact.
+
+<div style="page-break-after: always;"></div>
 
 ## Handling request & response
 
