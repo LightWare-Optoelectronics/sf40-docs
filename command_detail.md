@@ -239,7 +239,7 @@ Data response when reading or writing:
 |0x00|`int16`|Average distance [cm]|
 |0x02|`int16`|Closest distance [cm]|
 |0x04|`int16`|Furthest distance [cm]|
-|0x06|`int16`|Angle to closest distance [degrees]|
+|0x06|`int16`|Angle to closest distance [10ths of a degree]|
 |0x08|`uint32`|Calculation time [us]|
 
 Data for request when writing:

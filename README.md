@@ -17,6 +17,7 @@ This document supports the following devices (See [Firmware change log](change_l
 
 |Revision|Date|Notes|
 |---|---|---|
+| 4 | 08/11/2018 | Added change log for version V1.3.0. Updated link to Upgrader tool. Modified command `Distance [105]`. |
 | 3 | 02/10/2018 | Added change log for version V1.1.2 & V1.2.0. Updated link to Upgrader tool. |
 | 2 | 27/09/2018 | Added change log for version V1.1.1. Command `Distance [105]` now shows the correct read/write byte count. |
 | 1 | 26/09/2018 | Added change log for version V1.1.0. Added link/description for Upgrader tool. Modified command `Distance [105]`. Updated FDA approval. Updated range and height specifications. |
