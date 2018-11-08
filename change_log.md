@@ -2,7 +2,7 @@
 
 ## Upgrading
 
-> NOTE: The Upgrader tool only currently supports Windows at this time.
+> NOTE: The Upgrader tool only currently supports **Microsoft Windows®** at this time.
 
 1. Download the LightWare Upgrader tool here: http://support.lightware.co.za/LightWareUpgrader-1.16.0.rar
 2. Unzip the downloaded file to a location on your PC.
@@ -15,12 +15,12 @@
 ## 1.2.0
 
 *Features*
-- Added a minimum distance parameter for Pixhawk compatibility mode.
+- Added a minimum distance parameter for flight controller compatibility mode.
 
 ## 1.1.2
 
 *Fixes*
-- Pixhawk compatibility mode now correctly uses the orientation setting.
+- Flight controller compatibility mode now correctly uses the orientation setting.
 
 ## 1.1.1
 
@@ -35,7 +35,7 @@
 - Modified `Distance [105]` command to accept a minimum range parameter.
 - Modified `Distance [105]` command to output angle to closest distance measurement.
 - Less aggressive power draw on the 5V line during start-up.
-- Supports Pixhawk proximity detection when disabling LWNX mode.
+- Supports flight controller proximity detection when disabling LWNX mode.
 
 *Fixes*
 - The `Point start index` field of the `Distance output [48]` command now correctly takes the `Output rate [108]` into account.

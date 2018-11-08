@@ -2,13 +2,12 @@
 
 ## Product name [0]
 
-A `16 byte string` indicating the product model name. This will always be `SF40` followed by a null terminator. You can use this to verify the SF40 is connected and operational over the selected interface.
+A `16 byte string` indicating the product model name. This will always be `SF40` followed by a null terminator. You can use this to verify the SF40/C is connected and operational over the selected interface.
 
 |Read|Write|Persists|
 |---|---|---|
 | `16 byte string` | - | - |
 
----
 ## Hardware version [1]
 
 The hardware revision number as a `uint32`.
@@ -17,7 +16,6 @@ The hardware revision number as a `uint32`.
 |---|---|---|
 | `uint32` | - | - |
 
----
 ## Firmware version [2]
 
 The version of currently installed firmware represented as `4 bytes`. This can be used to identify the product for API compatibility.
@@ -30,7 +28,6 @@ The version of currently installed firmware represented as `4 bytes`. This can b
 |---|---|---|
 | `4 bytes` | - | - |
 
----
 ## Serial number [3]
 
 A `16 byte string` (null terminated) of the serial identifier assigned during production.
@@ -39,18 +36,16 @@ A `16 byte string` (null terminated) of the serial identifier assigned during pr
 |---|---|---|
 | `16 byte string` | - | - |
 
----
 ## UTF8 text message [7]
 
 *Serial interface only*
 
-A null terminated ASCII string. The SF40 will send this command when it needs to communicate a human readable message.
+A null terminated ASCII string. The SF40/C will send this command when it needs to communicate a human readable message.
 
 |Read|Write|Persists|
 |---|---|---|
 | - | - | - |
 
----
 ## User data [9]
 
 This command allows 16 bytes to be stored and read for any purpose.
@@ -59,7 +54,6 @@ This command allows 16 bytes to be stored and read for any purpose.
 |---|---|---|
 | `16 bytes` | `16 bytes` | Yes |
 
----
 ## Token [10]
 
 Current safety token required for performing certain operations. Once a token has been used it will expire and a new token is created. 
@@ -68,7 +62,6 @@ Current safety token required for performing certain operations. Once a token ha
 |---|---|---|
 | `uint16` | - | - |
 
----
 ## Save parameters [12]
 
 Several commands write to parameters that can persist across power cycles. These parameters will only persist once the `Save parameters` command has been written with the appropriate `token`. The safety token is used to prevent unintentional writes and once a successful save has completed the token will expire.
@@ -77,19 +70,19 @@ Several commands write to parameters that can persist across power cycles. These
 |---|---|---|
 | - | `uint16` | - |
 
----
 ## Reset [14]
 
-Writing the safety `token` to this command will restart the SF40.
+Writing the safety `token` to this command will restart the SF40/C.
 
 |Read|Write|Persists|
 |---|---|---|
 | - | `uint16` | - |
 
----
+<div style="page-break-after: always;"></div>
+
 ## Stage firmware [16]
 
-The first part of uploading firmware to the SF40 is to stage the data. This command accepts pages of the firmware, each `128 bytes` long, and an index to indicate which page is being uploaded. Pages are created by dividing the firmware upgrade file into multiple 128 byte chunks.
+The first part of uploading firmware to the SF40/C is to stage the data. This command accepts pages of the firmware, each `128 bytes` long, and an index to indicate which page is being uploaded. Pages are created by dividing the firmware upgrade file into multiple 128 byte chunks.
 
 When writing to this command, use the following data structure:
 
@@ -115,10 +108,9 @@ When reading this command, or analyzing its response after writing a page, the p
 |---|---|---|
 | `int32` | `130 bytes` | - |
 
----
 ## Commit firmware [17]
 
-The second part of uploading firmware to the SF40 is to commit the staged data. Once the firmware data has been fully uploaded using the [Stage firmware [16]](command_detail?id=stage-firmware-16) command, then this command can be written to (with 0 bytes).
+The second part of uploading firmware to the SF40/C is to commit the staged data. Once the firmware data has been fully uploaded using the [Stage firmware [16]](command_detail?id=stage-firmware-16) command, then this command can be written to (with 0 bytes).
 
 When reading this command, or analyzing its response after writing, the packet will contain an `int32` error code:
 
@@ -127,7 +119,7 @@ When reading this command, or analyzing its response after writing, the packet w
 |-1|Firmware integrity check failed|
 |1|Firmware integrity check passed and firmware committed|
 
-Once the firmware is committed, a reboot is required to engage the new firmware. This can be done by cycling power to the SF40 or by sending the [Reset [14]](command_detail?id=reset-14) command.
+Once the firmware is committed, a reboot is required to engage the new firmware. This can be done by cycling power to the SF40/C or by sending the [Reset [14]](command_detail?id=reset-14) command.
 
 After the unit has rebooted the firmware version should be checked to ensure the new firmware is installed.
 
@@ -135,7 +127,6 @@ After the unit has rebooted the firmware version should be checked to ensure the
 |---|---|---|
 | `int32` | `0 bytes` | - |
 
----
 ## Incoming voltage [20]
 
 The incoming voltage is directly measured from the incoming 5 V line. The response from reading this command is in counts. To convert the counts to voltage use the following equation:
@@ -146,10 +137,9 @@ The incoming voltage is directly measured from the incoming 5 V line. The respon
 |---|---|---|
 | `uint32` | - | - |
 
----
 ## Stream [30]
 
-The SF40 can continuously output data without individual request commands being issued. Reading from the `Stream` command will indicate what type of data is being streamed. Writing to the `Stream` command will set the type of data to be streamed.
+The SF40/C can continuously output data without individual request commands being issued. Reading from the `Stream` command will indicate what type of data is being streamed. Writing to the `Stream` command will set the type of data to be streamed.
 
 |Value|Streamed data|
 |---|---|
@@ -160,7 +150,6 @@ The SF40 can continuously output data without individual request commands being 
 |---|---|---|
 | `uint32` | `uint32` | No |
 
----
 ## Distance output [48]
 
 This command contains measurement results over a period of time. If [Stream [30]](command_detail?id=stream-30) is set to `3` then this command will automatically output as measurements are taken.
@@ -168,6 +157,8 @@ This command contains measurement results over a period of time. If [Stream [30]
 !> Please note that the rate at which this command is output will vary based on [Output rate [108]](command_detail?id=output-rate-108).
 
 Each distance output packet contains distance measurement data for a consecutive series of points. There is a maximum of 200 points per packet. A packet will only contain points from the same revolution.
+
+<div style="page-break-after: always;"></div>
 
 The data is composed as follows:
 
@@ -193,8 +184,6 @@ By using the `Point start index` and `Point total` you can determine the angle i
 |---|---|---|
 | - | - | - |
 
----
-
 ## Laser firing [50]
 
 Reading this command will indicate the current laser firing state. Writing to this command will enable or disable the firing of the laser. 
@@ -208,7 +197,8 @@ Reading this command will indicate the current laser firing state. Writing to th
 |---|---|---|
 | `uint8` | `uint8` | No |
 
----
+<div style="page-break-after: always;"></div>
+
 ## Temperature [55]
 
 Reading this command will return the temperature in 100ths of a degree.
@@ -217,7 +207,6 @@ Reading this command will return the temperature in 100ths of a degree.
 |---|---|---|
 | `uint32` | - | - |
 
----
 ## Baud rate [90]
 
 The baud rate as used by the serial interface. This parameter only takes effect when the serial interface is first enabled after power-up or restart.
@@ -235,12 +224,13 @@ Reading this command will return the baud rate. Writing to this command will set
 |---|---|---|
 | `uint8` | `uint8` | Yes |
 
----
 ## Distance [105]
 
 !> NOTE: The data structure for reading/writing this command has changed since firmware 1.0.1.
 
 Reading this command will return the `average`, `closest` and `furthest` distance within an angular view pointing in a specified direction. When writing to this command you can specify the direction and angular width of the view that the results are calculated from. The response to the write command is the same as the read command. Readings below the `Minimum distance` will be ignored.
+
+<div style="page-break-after: always;"></div>
 
 Data response when reading or writing:
 
@@ -264,7 +254,6 @@ Data for request when writing:
 |---|---|---|
 | `12 bytes` | `6 bytes` | N |
 
----
 ## Motor state [106]
 
 Reading this command will return the current state of the motor. This can be useful to debug or check start-up conditions.
@@ -280,7 +269,8 @@ Reading this command will return the current state of the motor. This can be use
 |---|---|---|
 | `uint8` | - | - |
 
----
+<div style="page-break-after: always;"></div>
+
 ## Motor voltage [107]
 
 Reading this command will return the voltage drawn by the motor in mV.
@@ -289,7 +279,6 @@ Reading this command will return the voltage drawn by the motor in mV.
 |---|---|---|
 | `uint16` | - | - |
 
----
 ## Output rate [108]
 
 The output rate controls the amount of data sent to the host when distance output streaming is enabled.
@@ -305,16 +294,14 @@ The output rate controls the amount of data sent to the host when distance outpu
 |---|---|---|
 | `uint8` | `uint8` | Yes |
 
----
 ## Forward offset [109]
 
-The forward offset affects the position of the `0 degree` direction. The `orientation` label on the front of the SF40 marks the default `0 degree` direction.
+The forward offset affects the position of the `0 degree` direction. The `orientation` label on the front of the SF40/C marks the default `0 degree` direction.
 
 |Read|Write|Persists|
 |---|---|---|
 | `int16` | `int16` | Yes |
 
----
 ## Revolutions [110]
 
 Reading this command will return the number of full revolutions since start-up.
@@ -325,7 +312,6 @@ Reading this command will return the number of full revolutions since start-up.
 |---|---|---|
 | `uint32` | - | - |
 
----
 ## Alarm state [111]
 
 Reading this command will return a byte with the current state of all alarms. Each bit represents 1 of the 7 alarms, if the bit is set then the alarm is currently triggered. The most significant bit is set when any alarm is currently triggered.
@@ -345,7 +331,6 @@ Reading this command will return a byte with the current state of all alarms. Ea
 |---|---|---|
 | `1 byte` | - | - |
 
----
 ## Alarm 1 [112]
 
 !> This is the same for all 7 alarms.
@@ -365,7 +350,8 @@ The same data bytes as specified above can be written to this command to set the
 |---|---|---|
 | `7 bytes` | `7 bytes` | Yes |
 
----
+<div style="page-break-after: always;"></div>
+
 ## Alarm 2 [113]
 
 By reading this command the configuration for this alarm is retrieved as follows:
@@ -383,7 +369,6 @@ The same data bytes as specified above can be written to this command to set the
 |---|---|---|
 | `7 bytes` | `7 bytes` | Yes |
 
----
 ## Alarm 3 [114]
 
 By reading this command the configuration for this alarm is retrieved as follows:
@@ -401,7 +386,6 @@ The same data bytes as specified above can be written to this command to set the
 |---|---|---|
 | `7 bytes` | `7 bytes` | Yes |
 
----
 ## Alarm 4 [115]
 
 By reading this command the configuration for this alarm is retrieved as follows:
@@ -419,7 +403,6 @@ The same data bytes as specified above can be written to this command to set the
 |---|---|---|
 | `7 bytes` | `7 bytes` | Yes |
 
----
 ## Alarm 5 [116]
 
 By reading this command the configuration for this alarm is retrieved as follows:
@@ -437,7 +420,6 @@ The same data bytes as specified above can be written to this command to set the
 |---|---|---|
 | `7 bytes` | `7 bytes` | Yes |
 
----
 ## Alarm 6 [117]
 
 By reading this command the configuration for this alarm is retrieved as follows:
@@ -455,7 +437,8 @@ The same data bytes as specified above can be written to this command to set the
 |---|---|---|
 | `7 bytes` | `7 bytes` | Yes |
 
----
+<div style="page-break-after: always;"></div>
+
 ## Alarm 7 [118]
 
 By reading this command the configuration for this alarm is retrieved as follows:

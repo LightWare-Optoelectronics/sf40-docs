@@ -2,7 +2,7 @@
 
 ## Overview
 
-The SF40 uses a 3.3 V (5 V tolerant) TTL serial UART for communication. Communication is performed using encapsulated packets for both sending and receiving data. Every packet that is sent to the SF40 is known as a `request` and a request will always be replied to with a `response`. There are cases where the SF40 will send a request packet to the host, these packets are considered `streaming` packets do not require a response from the host.
+The SF40/C uses a 3.3 V (5 V tolerant) TTL serial UART for communication. Communication is performed using encapsulated packets for both sending and receiving data. Every packet that is sent to the SF40/C is known as a `request` and a request will always be replied to with a `response`. There are cases where the SF40/C will send a request packet to the host, these packets are considered `streaming` packets do not require a response from the host.
 
 Requests are made using one of the available [commands](commands.md) and are either flagged as `read` or `write`. When a read request is issued then the response will contain the requested data. When a write request is issued then the contents of the response will vary depending on the command.
 
@@ -13,7 +13,7 @@ Requests are made using one of the available [commands](commands.md) and are eit
 - Stop: `1 bit`
 - Flow control: `none`
 
-!> The SF40 can operate in baud rates as low as `115200` but maximum data output will require higher rates.
+!> The SF40/C can operate in baud rates as low as `115200` but maximum data output will require higher rates.
 
 ## Packets
 
@@ -69,7 +69,7 @@ The `CRC` bytes form a 16 bit checksum value used to validate the integrity of t
 ## Checksum
 Each packet has a 2 byte checksum which is used to validate data integrity. The algorithm is `CRC-16-CCITT 0x1021` (idendtical to the one used for the XMODEM protocol).
 
-The CRC must be correctly formed for the SF40 to accept and process packets. Below are some examples in various languages for CRC calculation:
+The CRC must be correctly formed for the SF40/C to accept and process packets. Below are some examples in various languages for CRC calculation:
 
 **C/C++**
 ```c
@@ -131,7 +131,7 @@ Here is the process for reading the raw serial byte stream and identifying packe
 
 ## Handling request & response
 
-Every request sent to the SF40 will receive a response, it is often useful to use the response as a way to determine if the request was received and processed.
+Every request sent to the SF40/C will receive a response, it is often useful to use the response as a way to determine if the request was received and processed.
 Here is the recommended procedure for sending a command request and reading the response:
 
 <div style="text-align:center"><img src ="images/serial_request_response_flow.svg"/></div>

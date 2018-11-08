@@ -1,6 +1,6 @@
 # Specifications
 
-| | SF40/C (100 m)|
+| | SF40/C|
 |---|---|
 | **Range** | 0.2 ... 100 meters (natural targets)|
 | **Revolutions per second** | 5.5
