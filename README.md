@@ -7,6 +7,7 @@ This document supports the following devices (See [Firmware change log](change_l
 
 |Product|Hardware|Firmware|Supported|
 |----|--------|--------|:-------:|
+|SF40/C|1   |1.3.0   |Yes      |
 |SF40/C|1   |1.2.0   |Yes      |
 |SF40/C|1   |1.1.2   |Yes      |
 |SF40/C|1   |1.1.1   |Yes      |
