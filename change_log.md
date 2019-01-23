@@ -4,13 +4,18 @@
 
 > NOTE: The Upgrader tool only supports **Microsoft Windows®** at this time.
 
-1. Download the LightWare Upgrader tool here: http://support.lightware.co.za/LightWareUpgrader-1.19.0.rar
+1. Download the LightWare Upgrader tool here: http://support.lightware.co.za/LightWareUpgrader-1.26.0.rar
 2. Unzip the downloaded file to a location on your PC.
 3. Run the file `LightWareUpgrader.exe` in the unzipped folder.
 4. Connect your LightWare device via USB to your PC.
 5. Click the COM port that appears.
 6. If the device is not the latest version you can click the `Upgrade` button to begin the process.
 7. Wait until the upgrade has completed successfully and click `OK`.
+
+## 1.4.0
+
+*Changes*
+- Improved noise issues.
 
 ## 1.3.0
 

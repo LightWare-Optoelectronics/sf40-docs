@@ -7,6 +7,7 @@ This document supports the following devices (See [Firmware change log](change_l
 
 |Product|Hardware|Firmware|Supported|
 |----|--------|--------|:-------:|
+|SF40/C|1   |1.4.0   |Yes      |
 |SF40/C|1   |1.3.0   |Yes      |
 |SF40/C|1   |1.2.0   |Yes      |
 |SF40/C|1   |1.1.2   |Yes      |
@@ -18,6 +19,7 @@ This document supports the following devices (See [Firmware change log](change_l
 
 |Revision|Date|Notes|
 |---|---|---|
+| 5 | 23/01/2019 | Added change log for version V1.4.0. Updated link to Upgrader tool. |
 | 4 | 08/11/2018 | Added change log for version V1.3.0. Updated link to Upgrader tool. Modified command `Distance [105]`. |
 | 3 | 02/10/2018 | Added change log for version V1.1.2 & V1.2.0. Updated link to Upgrader tool. |
 | 2 | 27/09/2018 | Added change log for version V1.1.1. Command `Distance [105]` now shows the correct read/write byte count. |
