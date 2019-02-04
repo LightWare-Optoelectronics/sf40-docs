@@ -19,6 +19,7 @@ This document supports the following devices (See [Firmware change log](change_l
 
 |Revision|Date|Notes|
 |---|---|---|
+| 6 | 04/02/2019 | Updated dimension drawing. |
 | 5 | 23/01/2019 | Added change log for version V1.4.0. Updated link to Upgrader tool. |
 | 4 | 08/11/2018 | Added change log for version V1.3.0. Updated link to Upgrader tool. Modified command `Distance [105]`. |
 | 3 | 02/10/2018 | Added change log for version V1.1.2 & V1.2.0. Updated link to Upgrader tool. |
