@@ -32,12 +32,12 @@
 *Fixes*
 - Flight controller compatibility mode now correctly uses the orientation setting.
 
+<div style="page-break-after: always;"></div>
+
 ## 1.1.1
 
 *Fixes*
 - Version `1.1.0` had the LWNX protocol disabled by default. It is now active by default.
-
-<div style="page-break-after: always;"></div>
 
 ## 1.1.0
 
